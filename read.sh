@@ -1,5 +1,8 @@
 #!/bin/sh
-DATA=$(python /home/pi/airthings/read_wave2.py 2950010920 30)
+DATA=$(python /home/pi/airthings/read_wave2.py 2950010920 0)
+if [ "$DATA" == "" ]; then
+ DATA=$(python /home/pi/airthings/read_wave2.py 2950010920 0)
+fi
 HUM=$(echo $DATA | awk '{print $2}')
 TP=$(echo $DATA | awk '{print $5}')
 RAD=$(echo $DATA | awk '{print $9}')

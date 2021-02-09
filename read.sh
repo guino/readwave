@@ -1,8 +1,9 @@
-#!/bin/sh
-DATA=$(python /home/pi/airthings/read_wave2.py 2950010920 0)
-if [ "$DATA" == "" ]; then
+#!/bin/bash
+TRY=0
+while [ "$DATA" == "" ] && [ $TRY -lt 5 ]; do
  DATA=$(python /home/pi/airthings/read_wave2.py 2950010920 0)
-fi
+ TRY=$((TRY+1))
+done
 HUM=$(echo $DATA | awk '{print $2}')
 TP=$(echo $DATA | awk '{print $5}')
 RAD=$(echo $DATA | awk '{print $9}')
